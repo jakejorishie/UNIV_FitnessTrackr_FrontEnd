@@ -32,7 +32,7 @@ export default function Register({ setToken }) {
       username,
       password,
     });
-    const token = data.data.token;
+    const token = data.token;
     localStorage.setItem("token", JSON.stringify(token));
     setToken(token);
   };

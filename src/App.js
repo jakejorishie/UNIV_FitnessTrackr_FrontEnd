@@ -5,6 +5,7 @@ import Register from './Components/Register';
 import Login from './Components/Login';
 
 function App() {
+  // eslint-disable-next-line
   const [token, setToken] = useState("");
   useEffect(()=>{
     const myToken = localStorage.getItem("token")
