@@ -10,15 +10,14 @@ async function loginUser({ username, password }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        user: {
+        
           username: username,
           password: password,
         },
-      }),
+      ),
     })
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
         return result;
       })
       .catch(console.error);
@@ -34,10 +33,11 @@ async function loginUser({ username, password }) {
         username,
         password,
       });
-      console.log(data);
-      const token = data.data.token;
+      
+      const token = data.token;
       localStorage.setItem("token", token);
       setToken(token)
+      
       navigate("/posts", { replace: true });
     };
   

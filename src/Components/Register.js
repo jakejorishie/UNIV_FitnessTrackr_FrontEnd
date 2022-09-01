@@ -3,23 +3,24 @@ import React, { useState } from "react";
 const APIURL = "https://fitnesstrac-kr.herokuapp.com/api";
 
 async function registerUser({ username, password }) {
-  return fetch(APIURL + "/users/register", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      user: {
-        username: username,
-        password: password,
-      },
-    }),
-  })
-    .then((response) => response.json())
-    .then((result) => {
-      return result;
-    })
-    .catch(console.error);
+    try {
+        const request = await fetch(`${APIURL}/users/register`,{
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password,
+              },
+            ),
+          })
+        const response = await request.json()
+        return response
+    } catch (error) {
+        console.error(error);
+    }
+
 }
 export default function Register({ setToken }) {
   const [username, setUserName] = useState("");
@@ -32,9 +33,6 @@ export default function Register({ setToken }) {
       password,
     });
     const token = data.data.token;
-    console.log("data", data);
-    console.log("Token in Register", token);
-    console.log("setToken in Register", setToken);
     localStorage.setItem("token", JSON.stringify(token));
     setToken(token);
   };
