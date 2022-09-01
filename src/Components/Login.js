@@ -1,100 +1,102 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-
-const APIURL = "https://fitnesstrac-kr.herokuapp.com/api";
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { APIURL } from '../index';
 
 async function loginUser({ username, password }) {
-    return fetch(APIURL + "/users/login", {
-      method: "POST",
+   return fetch(`${APIURL}/users/login`, {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        
-          username: username,
-          password: password,
-        },
-      ),
-    })
+         username: username,
+         password: password,
+      }),
+   })
       .then((response) => response.json())
       .then((result) => {
-        return result;
+         return result;
       })
       .catch(console.error);
-  }
-  export default function Login({ setToken }) {
-    const [username, setUserName] = useState("");
-    const [password, setPassword] = useState("");
-    const navigate = useNavigate();
-  
-    const handleSubmit = async (e) => {
+}
+export default function Login({ setToken }) {
+   const [username, setUserName] = useState('');
+   const [password, setPassword] = useState('');
+   const navigate = useNavigate();
+
+   const handleSubmit = async (e) => {
       e.preventDefault();
       const data = await loginUser({
-        username,
-        password,
+         username,
+         password,
       });
-      
+
       const token = data.token;
-      localStorage.setItem("token", token);
-      setToken(token)
-      
-      navigate("/posts", { replace: true });
-    };
-  
-    return (
+      localStorage.setItem('token', token);
+      setToken(token);
+
+      navigate('/posts', { replace: true });
+   };
+
+   return (
       <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          position: "fixed",
-          top: "25%",
-          left: "42%",
-        }}
-      >
-        <form onSubmit={handleSubmit}>
-          <h1> Log in</h1>
-          <label>
-            <p>Username</p>
-            <input type="text" onChange={(e) => setUserName(e.target.value)} />
-          </label>
-          <div>
+         style={{
+            display: 'flex',
+            justifyContent: 'center',
+            position: 'fixed',
+            top: '25%',
+            left: '42%',
+         }}>
+         <form onSubmit={handleSubmit}>
+            <h1> Log in</h1>
             <label>
-              <p>Password</p>
-              <input
-                type="password"
-                onChange={(e) => setPassword(e.target.value)}
-              />
+               <p>Username</p>
+               <input
+                  type='text'
+                  onChange={(e) => setUserName(e.target.value)}
+               />
             </label>
-          </div>
-  
-          <div
-            style={{
-              position: "relative",
-              top: "5%",
-              left: "5%",
-            }}
-          >
-            <button type="login"
-            style={{
-                display: "flex",
-                justifyContent: "center",
-                position: "fixed",
-                left: "45%",
-              }}>Log In</button>
             <div>
-              <Link to="/register" 
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                position: "fixed",
-                top: "57%",
-                left: "41%",
-              }}>
-                Dont have an account?
-              </Link>
+               <label>
+                  <p>Password</p>
+                  <input
+                     type='password'
+                     onChange={(e) => setPassword(e.target.value)}
+                  />
+               </label>
             </div>
-          </div>
-        </form>
+
+            <div
+               style={{
+                  position: 'relative',
+                  top: '5%',
+                  left: '5%',
+               }}>
+               <button
+                  type='login'
+                  style={{
+                     display: 'flex',
+                     justifyContent: 'center',
+                     position: 'fixed',
+                     left: '45%',
+                  }}>
+                  Log In
+               </button>
+               <div>
+                  <Link
+                     to='/register'
+                     style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        position: 'fixed',
+                        top: '57%',
+                        left: '41%',
+                     }}>
+                     Dont have an account?
+                  </Link>
+               </div>
+            </div>
+         </form>
       </div>
-    );
-  }
+   );
+}
