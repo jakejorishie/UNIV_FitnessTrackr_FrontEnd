@@ -5,21 +5,29 @@ import { APIURL } from '../index';
 const MyRoutines = ({token}) => {
 const [routines, setRoutines] = useState([]);
 
-useEffect(() => {
-    const fetchUser = fetch(`${APIURL}users/me`, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer TOKEN_STRING_HERE'
-        },
-      }).then(response => response.json())
-        .then(result => {
-          console.log(result);
-        })
-        .catch(console.error);
-})
     useEffect(() => {
-        const fetchAllRoutines = async () => {
-           const response = await fetch(`${APIURL}/users/:username/routines`, {
+
+        const getUser = async () => {
+            const token = localStorage.getItem("token");
+            console.log(token)
+            const response = await fetch('http://fitnesstrac-kr.herokuapp.com/api/users/me', {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+          }).then(response => response.json())
+            .then(result => {
+              console.log(result);
+              return result;
+            })
+            .catch(console.error);
+            return response;
+
+        }
+
+        const fetchMyRoutines = async () => {
+            const user = await getUser()
+           const response = await fetch(`${APIURL}/users/${user.username}/routines`, {
               headers: {
                  'Content-Type': 'application/json',
               },
@@ -29,7 +37,7 @@ useEffect(() => {
                setRoutines(result);
            
         };
-        fetchAllRoutines();
+        fetchMyRoutines();
      }, [token]);
     return (
 <>
