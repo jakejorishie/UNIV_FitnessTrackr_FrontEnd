@@ -4,50 +4,52 @@ import { Routes, Route } from 'react-router-dom';
 import Register from './Components/Register';
 import Login from './Components/Login';
 import NavBar from './Components/Navbar';
-import Logout from './Components/Logout';
+// import Logout from './Components/Logout';
 import Activities from './Components/Activities';
 import Routines from './Components/Routines';
 import MyRoutines from './Components/MyRoutines';
 
 function App() {
-   const [token, setToken] = useState('');
-   useEffect(() => {
-      const myToken = localStorage.getItem('token');
-      setToken(myToken);
-   }, []);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setIsLoggedIn(true);
+    }
+  }, []);
 
    return (
       <>
-         <NavBar token={token} />
+         <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
          <Routes>
-            <Route exact path='/' element={<Login />}>
+            <Route exact path='/' element={<Login setIsLoggedIn={setIsLoggedIn} />}>
                {' '}
             </Route>
-            <Route path='/Register' element={<Register />} />
+            <Route path='/Register' element={<Register setIsLoggedIn={setIsLoggedIn} />} />
             <Route
                path='/Login'
-               element={<Login token={token} setToken={setToken} />}
+               element={<Login  setIsLoggedIn={setIsLoggedIn} />}
             />
-            <Route
+            {/* <Route
                path='Logout'
-               element={<Logout token={token} setToken={setToken} />}
-            />
+               element={<Logout isLoggedIn={isLoggedIn} />}
+            /> */}
             <Route
                path='/Activities'
                element={
-                  <Activities token={token} setToken={setToken} />
+                  <Activities isLoggedIn={isLoggedIn} />
                }
             />
             <Route
                path='/Routines'
                element={
-                  <Routines token={token} setToken={setToken} />
+                  <Routines isLoggedIn={isLoggedIn}  />
                }
             />
              <Route
                path='/MyRoutines'
                element={
-                  <MyRoutines token={token} setToken={setToken} />
+                  <MyRoutines isLoggedIn={isLoggedIn} />
                }
             />
          </Routes>

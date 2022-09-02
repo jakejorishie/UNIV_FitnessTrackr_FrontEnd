@@ -42,7 +42,7 @@ const [routines, setRoutines] = useState([]);
     return (
 <>
 <h1>My Routines</h1>
-         {routines.map((routine) => (
+         {/* {routines.map((routine) => (
             <div key={routine.id}>
                <h3>{routine.name}</h3>
                <div>
@@ -50,7 +50,7 @@ const [routines, setRoutines] = useState([]);
                   <h3>{routine.creatorName}</h3>
                </div>
             </div>
-         ))}
+         ))} */}
 </>
     )
 }
