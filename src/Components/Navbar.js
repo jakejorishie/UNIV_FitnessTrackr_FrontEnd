@@ -23,7 +23,7 @@ const NavBar = ({ token, posts, setpostShown, username }) => {
                            Routines
                         </Button>
 
-                        <Button href='#' color='inherit'>
+                        <Button href='/Activities' color='inherit'>
                            Activities
                         </Button>
                      </>
@@ -38,7 +38,7 @@ const NavBar = ({ token, posts, setpostShown, username }) => {
                         <Button href='#' color='inherit'>
                            My Routines
                         </Button>
-                        <Button href='#' color='inherit'>
+                        <Button href='/Activities' color='inherit'>
                            Activities
                         </Button>
                         <Button href='/Logout' color='inherit'>

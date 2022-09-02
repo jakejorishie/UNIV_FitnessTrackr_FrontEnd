@@ -5,6 +5,7 @@ import Register from './Components/Register';
 import Login from './Components/Login';
 import NavBar from './Components/Navbar';
 import Logout from './Components/Logout';
+import Activities from './Components/Activities';
 
 function App() {
    const [token, setToken] = useState('');
@@ -28,6 +29,12 @@ function App() {
             <Route
                path='Logout'
                element={<Logout token={token} setToken={setToken} />}
+            />
+            <Route
+               path='/Activities'
+               element={
+                  <Activities token={token} setToken={setToken} />
+               }
             />
          </Routes>
       </>
