@@ -26,6 +26,7 @@ async function loginUser({ username, password }) {
    })
       .then((response) => response.json())
       .then((result) => {
+         console.log(result);
          return result;
       })
       .catch(console.error);
@@ -45,7 +46,7 @@ export default function Login({ setToken }) {
       const token = data.token;
       localStorage.setItem('token', token);
       setToken(token);
-      history('/Homepage');
+      history('/Activities');
    };
 
    return (

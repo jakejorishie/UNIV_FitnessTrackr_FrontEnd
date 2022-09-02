@@ -7,39 +7,49 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import { useNavigate } from 'react-router-dom';
 
-async function registerUser({ username, password }) {
-   try {
-      const request = await fetch(`${APIURL}/users/register`, {
-         method: 'POST',
-         headers: {
-            'Content-Type': 'application/json',
-         },
-         body: JSON.stringify({
-            username: username,
-            password: password,
-         }),
-      });
-      const response = await request.json();
-      return response;
-   } catch (error) {
-      console.error(error);
-   }
-}
-export default function Register({ setToken }) {
+export default function Register() {
    const [username, setUserName] = useState('');
    const [password, setPassword] = useState('');
+   const [token, setToken] = useState('');
    const history = useNavigate();
 
+   const registerUser = async (username, password) => {
+      try {
+         const response = await fetch(`${APIURL}/users/register`, {
+            method: 'POST',
+            headers: {
+               'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+               username: username,
+               password: password,
+            }),
+         });
+         const result = await response.json();
+         console.log(result);
+         return result;
+      } catch (error) {
+         throw error;
+      }
+   };
+
    const handleSubmit = async (e) => {
-      e.preventDefault();
-      const data = await registerUser({
-         username,
-         password,
-      });
-      const token = data.token;
-      localStorage.setItem('token', JSON.stringify(token));
-      setToken(token);
-      history('/Homepage');
+      try {
+         e.preventDefault();
+         const result = await registerUser(username, password);
+         if (result.error) {
+            throw result.error;
+         }
+         console.log('result', result);
+         const token = result.token;
+         console.log('token', token);
+         console.log('setToken', setToken);
+         localStorage.setItem('token', token);
+         setToken(token);
+         history('/Activities');
+      } catch (error) {
+         alert(error);
+      }
    };
 
    return (
@@ -77,17 +87,16 @@ export default function Register({ setToken }) {
                   onChange={(e) =>
                      setPassword(e.target.value)
                   }></TextField>
-               <TextField
+               {/* <TextField
                   margin='normal'
                   required
                   fullWidth
                   id='outlined-required'
                   label='Confirm Password'
                   type='password'
-                  value={password}
-                  onChange={(e) =>
-                     setPassword(e.target.value)
-                  }></TextField>
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  onBlur={onSubmit}></TextField> */}
                <Button
                   type='submit'
                   fullWidth
