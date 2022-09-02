@@ -2,24 +2,38 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { APIURL } from '../index';
 
-const Routines = ({token}) => {
+const MyRoutines = ({token}) => {
 const [routines, setRoutines] = useState([]);
+
+useEffect(() => {
+    const fetchUser = fetch(`${APIURL}users/me`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer TOKEN_STRING_HERE'
+        },
+      }).then(response => response.json())
+        .then(result => {
+          console.log(result);
+        })
+        .catch(console.error);
+})
     useEffect(() => {
         const fetchAllRoutines = async () => {
-           const response = await fetch(`${APIURL}/routines`, {
+           const response = await fetch(`${APIURL}/users/:username/routines`, {
               headers: {
                  'Content-Type': 'application/json',
               },
            });
            const result = await response.json();
            console.log(result);
-           setRoutines(result);
+               setRoutines(result);
+           
         };
         fetchAllRoutines();
      }, [token]);
     return (
 <>
-<h1>Routines</h1>
+<h1>My Routines</h1>
          {routines.map((routine) => (
             <div key={routine.id}>
                <h3>{routine.name}</h3>
@@ -32,4 +46,4 @@ const [routines, setRoutines] = useState([]);
 </>
     )
 }
-export default Routines
+export default MyRoutines
