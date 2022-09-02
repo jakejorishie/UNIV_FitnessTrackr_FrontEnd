@@ -6,6 +6,8 @@ import Login from './Components/Login';
 import NavBar from './Components/Navbar';
 import Logout from './Components/Logout';
 import Activities from './Components/Activities';
+import Routines from './Components/Routines';
+import MyRoutines from './Components/MyRoutines';
 
 function App() {
    const [token, setToken] = useState('');
@@ -34,6 +36,18 @@ function App() {
                path='/Activities'
                element={
                   <Activities token={token} setToken={setToken} />
+               }
+            />
+            <Route
+               path='/Routines'
+               element={
+                  <Routines token={token} setToken={setToken} />
+               }
+            />
+             <Route
+               path='/MyRoutines'
+               element={
+                  <MyRoutines token={token} setToken={setToken} />
                }
             />
          </Routes>
