@@ -67,11 +67,13 @@ const Login = ({ setIsLoggedIn }) => {
 //          password,
 //       });
 
+
 //       const token = data.token;
 //       localStorage.setItem('token', token);
 //       setToken(true);
 //       history('/Activities');
 //    };
+
 
    return (
       <Grid container component='main' sx={{ height: '100vh' }}>

@@ -8,6 +8,7 @@ import NavBar from './Components/Navbar';
 import Activities from './Components/Activities';
 import Routines from './Components/Routines';
 import MyRoutines from './Components/MyRoutines';
+import AddActivities from './Components/AddActivities';
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -52,6 +53,7 @@ function App() {
                   <MyRoutines isLoggedIn={isLoggedIn} />
                }
             />
+            <Route path='/AddActivities' element={<AddActivities token={token} setToken={setToken} />} />
          </Routes>
       </>
    );
