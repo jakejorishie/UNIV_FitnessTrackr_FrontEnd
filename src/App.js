@@ -8,6 +8,7 @@ import Logout from './Components/Logout';
 import Activities from './Components/Activities';
 import Routines from './Components/Routines';
 import MyRoutines from './Components/MyRoutines';
+import AddActivities from './Components/AddActivities';
 
 function App() {
    const [token, setToken] = useState('');
@@ -50,6 +51,7 @@ function App() {
                   <MyRoutines token={token} setToken={setToken} />
                }
             />
+            <Route path='/AddActivities' element={<AddActivities token={token} setToken={setToken} />} />
          </Routes>
       </>
    );

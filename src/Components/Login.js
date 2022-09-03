@@ -45,7 +45,6 @@ export default function Login({ setToken }) {
 
       const token = data.token;
       localStorage.setItem('token', token);
-      setToken(token);
       history('/Activities');
    };
 

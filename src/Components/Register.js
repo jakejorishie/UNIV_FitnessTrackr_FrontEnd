@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 export default function Register() {
    const [username, setUserName] = useState('');
    const [password, setPassword] = useState('');
+   // eslint-disable-next-line
    const [token, setToken] = useState('');
    const history = useNavigate();
 
