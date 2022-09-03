@@ -12,6 +12,7 @@ const AddActivities = ({ activities, setActivities, token }) => {
 
     const handleSubmit = async (event) => {
        event.preventDefault();
+       const token = localStorage.getItem("token");
        const response = await fetch(`${APIURL}/activities`, {
           method: 'POST',
           headers: {
