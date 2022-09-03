@@ -12,41 +12,68 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
 const APIURL = 'https://fitnesstrac-kr.herokuapp.com/api';
-
-async function loginUser({ username, password }) {
-   return fetch(`${APIURL}/users/login`, {
-      method: 'POST',
-      headers: {
-         'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-         username: username,
-         password: password,
-      }),
-   })
-      .then((response) => response.json())
-      .then((result) => {
-         console.log(result);
-         return result;
-      })
-      .catch(console.error);
-}
-export default function Login({ setToken }) {
-   const [username, setUserName] = useState('');
-   const [password, setPassword] = useState('');
-   const history = useNavigate();
-
-   const handleSubmit = async (e) => {
-      e.preventDefault();
-      const data = await loginUser({
-         username,
-         password,
-      });
-
-      const token = data.token;
-      localStorage.setItem('token', token);
-      history('/Activities');
+const Login = ({ setIsLoggedIn }) => {
+   const [username, setUserName] = useState("");
+   const [password, setPassword] = useState("");
+   const navigate = useNavigate();
+ 
+   const submit = async (e) => {
+     e.preventDefault();
+     await fetch(`${APIURL}/users/login`, {
+       method: "POST",
+       headers: { "Content-Type": "application/json" },
+       body: JSON.stringify({
+           username: username,
+           password: password,
+       }),
+     })
+       .then((response) => response.json())
+       .then((result) => {
+         localStorage.setItem("token", result.token);
+         setIsLoggedIn(true);
+       })
+       .catch(console.error);
+ 
+     navigate("/Activities");
    };
+
+// async function loginUser({ username, password }) {
+//    return fetch(`${APIURL}/users/login`, {
+//       method: 'POST',
+//       headers: {
+//          'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify({
+//          username: username,
+//          password: password,
+//       }),
+//    })
+//       .then((response) => response.json())
+//       .then((result) => {
+//          console.log(result);
+//          return result;
+//       })
+//       .catch(console.error);
+// }
+// export default function Login({ setToken }) {
+//    const [username, setUserName] = useState('');
+//    const [password, setPassword] = useState('');
+//    const history = useNavigate();
+
+//    const handleSubmit = async (e) => {
+//       e.preventDefault();
+//       const data = await loginUser({
+//          username,
+//          password,
+//       });
+
+
+//       const token = data.token;
+//       localStorage.setItem('token', token);
+//       setToken(true);
+//       history('/Activities');
+//    };
+
 
    return (
       <Grid container component='main' sx={{ height: '100vh' }}>
@@ -90,7 +117,7 @@ export default function Login({ setToken }) {
                <Box
                   component='form'
                   noValidate
-                  onSubmit={handleSubmit}
+                  onSubmit={submit}
                   sx={{ mt: 1 }}>
                   <TextField
                      margin='normal'
@@ -192,3 +219,4 @@ export default function Login({ setToken }) {
       // </div>
    );
 }
+export default Login;

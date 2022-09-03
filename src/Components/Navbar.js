@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 
-const NavBar = ({ token, posts, setpostShown, username }) => {
+const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
    return (
       <>
          <Box sx={{ flexGrow: 1 }}>
@@ -17,7 +17,29 @@ const NavBar = ({ token, posts, setpostShown, username }) => {
                      sx={{ flexGrow: 1 }}>
                      Fitness Tracker
                   </Typography>
-                  {!token ? (
+                  {isLoggedIn ? (
+                     <>
+                     <Button href='#' color='inherit'>
+                        Home
+                     </Button>
+                     <Button href='/Routines' color='inherit'>
+                        Routines
+                     </Button>
+                     <Button href='/MyRoutines' color='inherit'>
+                        My Routines
+                     </Button>
+                     <Button href='/Activities' color='inherit'>
+                        Activities
+                     </Button>
+                     <Button color ='inherit' href="/"
+               onClick={() => {
+                 localStorage.removeItem("token");
+                 setIsLoggedIn(false);
+               }}> 
+               Logout
+                     </Button>
+                  </>
+                  ) : (
                      <>
                         <Button href='/Routines' color='inherit'>
                            Routines
@@ -26,23 +48,9 @@ const NavBar = ({ token, posts, setpostShown, username }) => {
                         <Button href='/Activities' color='inherit'>
                            Activities
                         </Button>
-                     </>
-                  ) : (
-                     <>
-                        <Button href='#' color='inherit'>
-                           Home
-                        </Button>
-                        <Button href='/Routines' color='inherit'>
-                           Routines
-                        </Button>
-                        <Button href='/MyRoutines' color='inherit'>
-                           My Routines
-                        </Button>
-                        <Button href='/Activities' color='inherit'>
-                           Activities
-                        </Button>
-                        <Button href='/Logout' color='inherit'>
-                           Logout
+
+                        <Button href='/Login' color='inherit'>
+                           Login
                         </Button>
                      </>
                   )}
@@ -56,4 +64,4 @@ const NavBar = ({ token, posts, setpostShown, username }) => {
    );
 };
 
-export default NavBar;
+export default Navbar;
