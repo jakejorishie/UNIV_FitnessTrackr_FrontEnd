@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 
-const NavBar = ({ token, posts, setpostShown, username }) => {
+const NavBar = ({ token }) => {
    return (
       <>
          <Box sx={{ flexGrow: 1 }}>
@@ -29,7 +29,7 @@ const NavBar = ({ token, posts, setpostShown, username }) => {
                      </>
                   ) : (
                      <>
-                        <Button href='#' color='inherit'>
+                        <Button href='/Activities' color='inherit'>
                            Home
                         </Button>
                         <Button href='/Routines' color='inherit'>

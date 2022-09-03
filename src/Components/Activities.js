@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { APIURL } from '../index';
+import { APIURL } from '../api/index';
 // eslint-disable-next-line
 import Typography from '@mui/material/Typography';
 // eslint-disable-next-line
@@ -29,11 +29,7 @@ const Activities = ({ token }) => {
       fetchAllActivities();
    }, [activities]);
 
-
-
-
-
-return (
+   return (
       <>
          <h1>Activities</h1>
          {activities.map((activity) => (

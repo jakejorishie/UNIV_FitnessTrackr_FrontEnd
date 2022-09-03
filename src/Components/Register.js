@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { APIURL } from '../index';
+import { APIURL } from '../api/index';
 import TextField from '@mui/material/TextField';
 import { Container } from '@mui/system';
 import { CssBaseline, Typography } from '@mui/material';
@@ -7,11 +7,10 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import { useNavigate } from 'react-router-dom';
 
-export default function Register() {
+export default function Register({ token, setToken }) {
    const [username, setUserName] = useState('');
    const [password, setPassword] = useState('');
-   // eslint-disable-next-line
-   const [token, setToken] = useState('');
+
    const history = useNavigate();
 
    const registerUser = async (username, password) => {

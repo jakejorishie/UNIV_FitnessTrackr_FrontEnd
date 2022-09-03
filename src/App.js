@@ -21,10 +21,18 @@ function App() {
       <>
          <NavBar token={token} />
          <Routes>
-            <Route exact path='/' element={<Login />}>
+            <Route
+               exact
+               path='/'
+               element={<Login token={token} setToken={setToken} />}>
                {' '}
             </Route>
-            <Route path='/Register' element={<Register />} />
+            <Route
+               path='/Register'
+               element={
+                  <Register token={token} setToken={setToken} />
+               }
+            />
             <Route
                path='/Login'
                element={<Login token={token} setToken={setToken} />}
@@ -45,13 +53,18 @@ function App() {
                   <Routines token={token} setToken={setToken} />
                }
             />
-             <Route
+            <Route
                path='/MyRoutines'
                element={
                   <MyRoutines token={token} setToken={setToken} />
                }
             />
-            <Route path='/AddActivities' element={<AddActivities token={token} setToken={setToken} />} />
+            <Route
+               path='/AddActivities'
+               element={
+                  <AddActivities token={token} setToken={setToken} />
+               }
+            />
          </Routes>
       </>
    );
