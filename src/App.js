@@ -56,7 +56,6 @@ function App() {
                }
             />
 
-            <Route path='/AddActivities' element={<AddActivities setIsLoggedIn={setIsLoggedIn} /> } />
 
              <Route
                path='/AddActivities'
