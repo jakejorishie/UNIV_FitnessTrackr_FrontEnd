@@ -1,5 +1,9 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { addRoutine } from '../api/index';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import { TextField } from '@mui/material';
 
 function AddRoutine(props) {
    const [token, setModifyRoutine] = [
@@ -10,8 +14,9 @@ function AddRoutine(props) {
    const [goal, setGoal] = useState('');
    const [isPublic, setIsPublic] = useState(false);
    const [message, setMessage] = useState('');
-   async function submitHandler(event) {
-      event.preventDefault();
+
+   async function handleSubmit(e) {
+      e.preventDefault();
       setModifyRoutine(true);
       const result = await addRoutine(name, goal, isPublic, token);
       if (
@@ -34,7 +39,30 @@ function AddRoutine(props) {
 
    return (
       <>
-         <select
+         <Box component='form' onSubmit={handleSubmit}>
+            <TextField
+               margin='normal'
+               fullWidth
+               id='outlined'
+               label='Name'
+               value={name}
+               onChange={(e) => setName(e.target.value)}></TextField>
+            <TextField
+               margin='normal'
+               fullWidth
+               id='outlined'
+               label='Goal'
+               value={goal}
+               onChange={(e) => setGoal(e.target.value)}></TextField>
+            <Button
+               variant='contained'
+               type='submit'
+               margin='normal'
+               aria-label='send'>
+               Send
+            </Button>
+         </Box>
+         {/* <select
             name='classification'
             id='select-classification'
             value={classification}
@@ -49,7 +77,9 @@ function AddRoutine(props) {
                   </option>
                );
             })}
-         </select>
+         </select> */}
       </>
    );
 }
+
+export default AddRoutine;
