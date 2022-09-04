@@ -53,6 +53,7 @@ function App() {
                   <MyRoutines isLoggedIn={isLoggedIn} />
                }
             />
+
              <Route
                path='/AddActivities'
                element={
@@ -66,6 +67,7 @@ function App() {
                   <AddRoutines isLoggedIn={isLoggedIn} />
                }
             />
+
          </Routes>
       </>
    );
