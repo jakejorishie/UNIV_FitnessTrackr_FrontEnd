@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { APIURL } from '../api/index';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -11,69 +12,66 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
-const APIURL = 'https://fitnesstrac-kr.herokuapp.com/api';
 const Login = ({ setIsLoggedIn }) => {
-   const [username, setUserName] = useState("");
-   const [password, setPassword] = useState("");
+   const [username, setUserName] = useState('');
+   const [password, setPassword] = useState('');
    const navigate = useNavigate();
- 
+
    const submit = async (e) => {
-     e.preventDefault();
-     await fetch(`${APIURL}/users/login`, {
-       method: "POST",
-       headers: { "Content-Type": "application/json" },
-       body: JSON.stringify({
-           username: username,
-           password: password,
-       }),
-     })
-       .then((response) => response.json())
-       .then((result) => {
-         localStorage.setItem("token", result.token);
-         setIsLoggedIn(true);
-       })
-       .catch(console.error);
- 
-     navigate("/Activities");
+      e.preventDefault();
+      await fetch(`${APIURL}/users/login`, {
+         method: 'POST',
+         headers: { 'Content-Type': 'application/json' },
+         body: JSON.stringify({
+            username: username,
+            password: password,
+         }),
+      })
+         .then((response) => response.json())
+         .then((result) => {
+            localStorage.setItem('token', result.token);
+            setIsLoggedIn(true);
+         })
+         .catch(console.error);
+
+      navigate('/Activities');
    };
 
-// async function loginUser({ username, password }) {
-//    return fetch(`${APIURL}/users/login`, {
-//       method: 'POST',
-//       headers: {
-//          'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify({
-//          username: username,
-//          password: password,
-//       }),
-//    })
-//       .then((response) => response.json())
-//       .then((result) => {
-//          console.log(result);
-//          return result;
-//       })
-//       .catch(console.error);
-// }
-// export default function Login({ setToken }) {
-//    const [username, setUserName] = useState('');
-//    const [password, setPassword] = useState('');
-//    const history = useNavigate();
+   // async function loginUser({ username, password }) {
+   //    return fetch(`${APIURL}/users/login`, {
+   //       method: 'POST',
+   //       headers: {
+   //          'Content-Type': 'application/json',
+   //       },
+   //       body: JSON.stringify({
+   //          username: username,
+   //          password: password,
+   //       }),
+   //    })
+   //       .then((response) => response.json())
+   //       .then((result) => {
+   //          console.log(result);
+   //          return result;
+   //       })
+   //       .catch(console.error);
+   // }
+   // export default function Login({ setToken }) {
+   //    const [username, setUserName] = useState('');
+   //    const [password, setPassword] = useState('');
+   //    const history = useNavigate();
 
-//    const handleSubmit = async (e) => {
-//       e.preventDefault();
-//       const data = await loginUser({
-//          username,
-//          password,
-//       });
+   //    const handleSubmit = async (e) => {
+   //       e.preventDefault();
+   //       const data = await loginUser({
+   //          username,
+   //          password,
+   //       });
 
-
-//       const token = data.token;
-//       localStorage.setItem('token', token);
-//       setToken(true);
-//       history('/Activities');
-//    };
-
+   //       const token = data.token;
+   //       localStorage.setItem('token', token);
+   //       setToken(true);
+   //       history('/Activities');
+   //    };
 
    return (
       <Grid container component='main' sx={{ height: '100vh' }}>
@@ -218,5 +216,5 @@ const Login = ({ setIsLoggedIn }) => {
       //   </form>
       // </div>
    );
-}
+};
 export default Login;

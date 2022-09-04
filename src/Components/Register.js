@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { APIURL } from '../index';
+import { APIURL } from '../api/index';
 import TextField from '@mui/material/TextField';
 import { Container } from '@mui/system';
 import { CssBaseline, Typography } from '@mui/material';
@@ -47,7 +47,7 @@ export default function Register() {
          console.log('setToken', setToken);
          localStorage.setItem('token', token);
          setToken(token);
-         history('/Activities');
+         history('/Login');
       } catch (error) {
          alert(error);
       }
