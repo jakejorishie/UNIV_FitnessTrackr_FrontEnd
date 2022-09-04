@@ -4,7 +4,6 @@ import { Routes, Route } from 'react-router-dom';
 import Register from './Components/Register';
 import Login from './Components/Login';
 import NavBar from './Components/Navbar';
-// import Logout from './Components/Logout';
 import Activities from './Components/Activities';
 import Routines from './Components/Routines';
 import MyRoutines from './Components/MyRoutines';
@@ -33,10 +32,7 @@ function App() {
                path='/Login'
                element={<Login  setIsLoggedIn={setIsLoggedIn} />}
             />
-            {/* <Route
-               path='Logout'
-               element={<Logout isLoggedIn={isLoggedIn} />}
-            /> */}
+            
             <Route
                path='/Activities'
                element={
