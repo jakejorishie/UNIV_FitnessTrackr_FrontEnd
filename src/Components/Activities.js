@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { APIURL } from '../index';
+import { APIURL } from '../api/index';
 import { useNavigate } from 'react-router-dom';
 // eslint-disable-next-line
 import Typography from '@mui/material/Typography';
@@ -17,8 +17,8 @@ const Activities = ({ isLoggedIn }) => {
    const [activities, setActivities] = useState([]);
    const navigate = useNavigate();
    const navigateNew = () => {
-      navigate("/AddActivities");
-    };
+      navigate('/AddActivities');
+   };
    useEffect(() => {
       const fetchAllActivities = async () => {
          const response = await fetch(`${APIURL}/activities`, {
@@ -33,21 +33,16 @@ const Activities = ({ isLoggedIn }) => {
       fetchAllActivities();
    }, [activities]);
 
-
-
-
-
-return (
+   return (
       <>
-      {isLoggedIn ? (
+         {isLoggedIn ? (
             <button
-              id="new-post-button"
-              className="m-button"
-              onClick={navigateNew}
-            >
-              Create New Post
+               id='new-post-button'
+               className='m-button'
+               onClick={navigateNew}>
+               Create New Activity
             </button>
-          ) : null}
+         ) : null}
          <h1>Activities</h1>
          {activities.map((activity) => (
             <div key={activity.id}>
