@@ -60,6 +60,13 @@ function App() {
                }
             />
          </Routes>
+         <Route
+               path='/AddRoutines'
+               element={
+                  <AddRoutines isLoggedIn={isLoggedIn} />
+               }
+            />
+         </Routes>
       </>
    );
 }
