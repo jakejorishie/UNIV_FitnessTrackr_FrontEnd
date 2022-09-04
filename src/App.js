@@ -9,6 +9,8 @@ import Activities from './Components/Activities';
 import Routines from './Components/Routines';
 import MyRoutines from './Components/MyRoutines';
 import AddActivities from './Components/AddActivities';
+import AddRoutines from './Components/AddRoutines';
+
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -54,13 +56,14 @@ function App() {
                }
             />
 
+
              <Route
                path='/AddActivities'
                element={
                   <AddActivities isLoggedIn={isLoggedIn} />
                }
             />
-         </Routes>
+         
          <Route
                path='/AddRoutines'
                element={
