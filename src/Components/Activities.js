@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { APIURL } from '../api/index';
+import { fetchAllActivities } from '../api/index';
 import { useNavigate } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
@@ -14,18 +14,23 @@ const Activities = ({ isLoggedIn }) => {
       navigate('/AddActivities');
    };
    useEffect(() => {
-      const fetchAllActivities = async () => {
-         const response = await fetch(`${APIURL}/activities`, {
-            headers: {
-               'Content-Type': 'application/json',
-            },
-         });
-         const result = await response.json();
-         console.log(result);
-         setActivities(result);
+      const fetchActivities = async () => {
+         const response = await fetchAllActivities();
+         setActivities(response);
       };
-      fetchAllActivities();
-   }, [activities]);
+      fetchActivities();
+
+      // const fetchAllActivities = async () => {
+      //    const response = await fetch(`${APIURL}/activities`, {
+      //       headers: {
+      //          'Content-Type': 'application/json',
+      //       },
+      //    });
+      //    const result = await response.json();
+      //    console.log(result);
+      //    setActivities(result);
+      // };
+   }, []);
 
    return (
       <>
@@ -43,7 +48,7 @@ const Activities = ({ isLoggedIn }) => {
             spacing={{ xs: 2, md: 3 }}
             columns={{ xs: 4, sm: 8, md: 12 }}>
             {activities.map((activity) => (
-               <Grid item xs={12} md={6} sm={4}>
+               <Grid key={activity.id} item xs={12} md={6} sm={4}>
                   <Card
                      variant='outlined'
                      sx={{

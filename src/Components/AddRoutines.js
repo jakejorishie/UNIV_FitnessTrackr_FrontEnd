@@ -4,6 +4,7 @@ import { addRoutine } from '../api/index';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { TextField } from '@mui/material';
+// import MenuItem from '@material-ui/core/MenuItem';
 
 function AddRoutine(props) {
    const [token, setModifyRoutine] = [
@@ -14,6 +15,7 @@ function AddRoutine(props) {
    const [goal, setGoal] = useState('');
    const [isPublic, setIsPublic] = useState(false);
    const [message, setMessage] = useState('');
+   const [activities, setActivities] = useState([]);
 
    async function handleSubmit(e) {
       e.preventDefault();
@@ -53,7 +55,15 @@ function AddRoutine(props) {
                id='outlined'
                label='Goal'
                value={goal}
-               onChange={(e) => setGoal(e.target.value)}></TextField>
+               onChange={(e) => setGoal(e.target.value)}>
+               {/* <Select>
+                  {activities.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                     {option.label}
+                  </MenuItem>
+               ))}
+                  </Select> */}
+            </TextField>
             <Button
                variant='contained'
                type='submit'
