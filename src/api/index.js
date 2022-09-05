@@ -2,15 +2,15 @@ export const APIURL = 'https://fitnesstrac-kr.herokuapp.com/api';
 
 export const addRoutine = async (name, goal, isPublic, token) => {
    const response = await fetch(`${APIURL}/routines`, {
+      method: 'POST',
       headers: {
          'Content-Type': 'application/json',
          Authorization: `Bearer ${token}`,
       },
-      method: 'POST',
       body: JSON.stringify({
-         name: name,
-         goal: goal,
-         isPublic: isPublic,
+         name,
+         goal,
+         isPublic,
       }),
    });
    const result = await response.json();
