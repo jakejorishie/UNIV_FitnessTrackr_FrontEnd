@@ -1,13 +1,27 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { APIURL } from '../api/index';
-import Typography from '@mui/material/Typography';
+import { IconButton, Typography, Button } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid';
+import { CardActions } from '@mui/material';
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Box from '@mui/material/Box';
+import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 
 const MyRoutines = ({ token }) => {
    const [routines, setRoutines] = useState([]);
+   const [open, setOpen] = useState(false);
+   const [goal, setGoal] = useState('');
+   const [name, setName] = useState('');
 
    useEffect(() => {
       const getUser = async () => {
@@ -44,10 +58,68 @@ const MyRoutines = ({ token }) => {
       };
       fetchMyRoutines();
    }, [token]);
+
+   const handleSubmit = async (e) => {
+      e.preventDefault();
+   };
+
+   const handleClickOpen = () => {
+      setOpen(true);
+   };
+
+   const handleClose = () => {
+      setOpen(false);
+   };
+
    return (
       <>
          <h1>My Routines</h1>
-
+         <IconButton
+            aria-label='edit'
+            size='small'
+            onClick={handleClickOpen}>
+            <AddCircleOutlineOutlinedIcon />
+            <Box
+               component='form'
+               sx={{
+                  marginTop: 8,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+               }}
+               onSubmit={handleSubmit}>
+               <Dialog open={open} onClose={handleClose}>
+                  <DialogTitle>Create Routine</DialogTitle>
+                  <DialogContent>
+                     <DialogContentText>
+                        Create a New Routine
+                     </DialogContentText>
+                     <TextField
+                        autoFocus
+                        margin='dense'
+                        id='outlined'
+                        label='Enter Routine Name'
+                        halfwidth='true'
+                        onChange={(e) => setName(e.target.value)}
+                     />
+                     <TextField
+                        autoFocus
+                        margin='dense'
+                        id='outlined-multiline-flexible'
+                        label='Enter Goal'
+                        multiline
+                        maxRows={4}
+                        halfwidth='true'
+                        onChange={(e) => setGoal(e.target.value)}
+                     />
+                  </DialogContent>
+                  <DialogActions>
+                     <Button onClick={handleClose}>Cancel</Button>
+                     <Button type='submit'>Create</Button>
+                  </DialogActions>
+               </Dialog>
+            </Box>
+         </IconButton>
          <Grid
             container
             spacing={{ xs: 2, md: 3 }}
@@ -73,6 +145,17 @@ const MyRoutines = ({ token }) => {
                            {routine.creatorName}
                         </Typography>
                      </CardContent>
+                     <CardActions>
+                        <IconButton
+                           aria-label='edit'
+                           size='small'
+                           href='/Update'>
+                           <EditIcon />
+                        </IconButton>
+                        <IconButton aria-label='delete' size='small'>
+                           <DeleteIcon />
+                        </IconButton>
+                     </CardActions>
                   </Card>
                </Grid>
             ))}
