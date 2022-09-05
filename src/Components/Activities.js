@@ -7,30 +7,18 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid';
 
-const Activities = ({ isLoggedIn }) => {
-   const [activities, setActivities] = useState([]);
+const Activities = ({ isLoggedIn, activities, setActivities}) => {
    const navigate = useNavigate();
    const navigateNew = () => {
       navigate('/AddActivities');
    };
-   useEffect(() => {
-      const fetchActivities = async () => {
-         const response = await fetchAllActivities();
-         setActivities(response);
-      };
-      fetchActivities();
-
-      // const fetchAllActivities = async () => {
-      //    const response = await fetch(`${APIURL}/activities`, {
-      //       headers: {
-      //          'Content-Type': 'application/json',
-      //       },
-      //    });
-      //    const result = await response.json();
-      //    console.log(result);
-      //    setActivities(result);
-      // };
-   }, []);
+   // useEffect(() => {
+   //    const fetchActivities = async () => {
+   //       const response = await fetchAllActivities();
+   //       setActivities(response);
+   //    };
+   //    fetchActivities();
+   // }, []);
 
    return (
       <>

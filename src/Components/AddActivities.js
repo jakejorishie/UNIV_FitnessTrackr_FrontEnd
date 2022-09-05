@@ -7,17 +7,16 @@ import { TextField, CssBaseline } from '@mui/material';
 import { Container } from '@mui/system';
 
 
-const AddActivities = ({ activities, setActivities, token }) => {
+const AddActivities = ({ activities, setActivities }) => {
    
 
    const [name, setName] = useState([]);
    const [description, setDescription] = useState([]);
-  
-
+   const navigate = useNavigate();
+console.log(activities);
 
    const handleSubmit = async (event) => {
       event.preventDefault();
-      const navigate = useNavigate;
       const token = localStorage.getItem('token');
       const response = await fetch(`${APIURL}/activities`, {
          method: 'POST',
@@ -32,7 +31,12 @@ const AddActivities = ({ activities, setActivities, token }) => {
       });
       const data = await response.json();
       console.log('data: ', data);
+      if (data.error) {
+         alert(data.error);
+         
+      }else {
       setActivities([data, ...activities]);
+      }
       setName('');
       setDescription('');
       navigate('/activities');

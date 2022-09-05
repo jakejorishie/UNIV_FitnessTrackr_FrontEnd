@@ -9,16 +9,26 @@ import Routines from './Components/Routines';
 import MyRoutines from './Components/MyRoutines';
 import AddActivities from './Components/AddActivities';
 import AddRoutines from './Components/AddRoutines';
+import { fetchAllActivities } from './api';
 
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [activities, setActivities] = useState([]);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
       setIsLoggedIn(true);
     }
   }, []);
+
+  useEffect(() => {
+   const fetchActivities = async () => {
+      const response = await fetchAllActivities();
+      setActivities(response);
+   };
+   fetchActivities();
+}, []);
 
    return (
       <>
@@ -36,7 +46,7 @@ function App() {
             <Route
                path='/Activities'
                element={
-                  <Activities isLoggedIn={isLoggedIn} />
+                  <Activities isLoggedIn={isLoggedIn} activities={activities} setActivities={setActivities} />
                }
             />
             <Route
@@ -56,7 +66,7 @@ function App() {
              <Route
                path='/AddActivities'
                element={
-                  <AddActivities isLoggedIn={isLoggedIn} />
+                  <AddActivities isLoggedIn={isLoggedIn} activities={activities} setActivities={setActivities} />
                }
             />
          
