@@ -17,7 +17,7 @@ export const addRoutine = async (name, goal, isPublic, token) => {
    return result;
 };
 
-export const getUser = async ({ token }) => {
+export const getUser = async (token) => {
    const response = await fetch(`${APIURL}/users/me`, {
       headers: {
          'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ export const attachActivity = async ({
    return result;
 };
 
-export const deleteRoutine = async ({ routineId, token }) => {
+export const deleteRoutine = async (routineId, token) => {
    const response = await fetch(`${APIURL}/routines/${routineId}`, {
       method: 'DELETE',
       headers: {
